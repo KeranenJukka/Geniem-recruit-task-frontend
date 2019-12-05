@@ -5,7 +5,14 @@ import './createaccount.css';
 
 import { Link } from 'react-router-dom';
 
+
+
 const axios = require('axios');
+
+var bcrypt = require('bcryptjs');
+
+
+
 
 class CreateAccount extends React.Component {
 
@@ -33,35 +40,97 @@ class CreateAccount extends React.Component {
 
 send = () => {
 
-    if (this.info.username.length === 0) {
+  var user = "Username";
+  var first = "First Name"
+  var pass = "Password"
+
+
+    if (this.info.username.length === 0 || this.info.firstname.length === 0 || this.info.password.length < 6) {
+
+      if (this.info.username.length === 0) {
+        user = "Pick a username!"
+        document.getElementById("user").style.color = "red";
+      }
+
+      else {document.getElementById("user").style.color = "black";}
+
+      if (this.info.firstname.length === 0) {
+        first = "Pick a name!"
+        document.getElementById("first").style.color = "red";
+      }
+
+      else {document.getElementById("first").style.color = "black";}
+
+      if (this.info.password.length < 6) {
+        pass = "Pick a password that is at least 6 characters long!"
+        document.getElementById("pass").style.color = "red";
+      }
+
+      else {document.getElementById("pass").style.color = "black";}
 
       this.setState({
-        username: "Pick a username!"
+        username: user,
+        firstname: first,
+        password: pass
       })
 
-      return null;
+      return null
 
     }
 
-    else if (this.info.password.length === 0) {
 
-      this.setState({
-        username: "Pick a username!"
-      })
+    this.setState({
+      username: user,
+      firstname: first,
+      password: pass
+    })
 
-      return null;
+    document.getElementById("user").style.color = "black";
+    document.getElementById("first").style.color = "black";
+    document.getElementById("pass").style.color = "black";
 
-    }
+    var infoSend = {...this.info}
 
 
-    axios.post('http://localhost:8080/adduser', this.info)
-    .then(function (response) {
-      console.log(response.data);
+
+    /* -------Check name--------*/
+
+    axios.post('http://localhost:8080/checkuser', infoSend)
+    .then(response => {
+      
+      if (response.data === "found") {
+
+        this.setState({
+          username: "This username is reserved!"
+        })
+        document.getElementById("user").style.color = "red";
+
+        return null
+      }
+      
+      else {
+
+    
+
+  /* -------Store info--------*/
+
+
+      axios.post('http://localhost:8080/adduser', infoSend)
+    .then( (response) => {
+      
+      if (response.data.res === "success") {
+        
+        this.props.changeToken(response.data.token)
+
+       // this.props.history.push('/theapp');
+
+      }
+      
     })
     .catch(function (error) {
-      console.log(error);
+      
     });
-
+    
 
     setTimeout(() => {
   
@@ -80,6 +149,12 @@ send = () => {
       
       
       }, 1000);
+
+       
+      
+}
+
+})
 
 }
 
@@ -118,6 +193,8 @@ change = (e) => {
 
 }
 
+
+
 render () {
 
 return (
@@ -129,16 +206,16 @@ return (
        <h1 className="thetitle" id="createtitle">Create Account</h1>
 
         <div className="form" id="createform">
-            <p className="info">{this.state.username}</p>
+            <p id="user" className="info">{this.state.username}</p>
             <input id="username" maxLength="20" onChange={this.change} type="text"></input>
 
-            <p className="info">{this.state.firstname}</p>
+            <p id="first" className="info">{this.state.firstname}</p>
             <input id="firstname" maxLength="20" onChange={this.change} type="text"></input>
 
             <p className="info">Last Name</p>
             <input id="lastname" maxLength="20" onChange={this.change} type="text"></input>
 
-            <p className="info">{this.state.username}</p>
+            <p id="pass" className="info">{this.state.password}</p>
             <input id="password" maxLength="20" onChange={this.change} type="text"></input>
 
         </div>
@@ -160,4 +237,18 @@ return (
 
 }
 
-export default CreateAccount
+
+function mapDispatchToProps (dispatch) {
+  
+  return {
+    changeToken: function (arg) {dispatch({
+        type: "changetoken",
+        token: arg
+    })}
+    
+  }
+  
+}
+
+export default connect(null, mapDispatchToProps)(CreateAccount);
+
