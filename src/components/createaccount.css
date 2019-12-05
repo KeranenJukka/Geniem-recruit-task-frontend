@@ -1,0 +1,19 @@
+
+/* login.css */
+
+#createwrap {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+#createaccountcont {
+    margin: 0 auto;
+    
+}
+
+
+#createform {
+    height: auto;
+}
