@@ -4,20 +4,27 @@
 #createwrap {
     
     height: auto;
-    
+    position: relative;
 }
 
 #createcont1 {
     height: 100vh;
     display: flex;
     align-items: center;
-    
+    position: absolute;
+    top: 0;
+    background: lightgray;
+    z-index: 10;
 }   
 
 #createcont2 {
     height: 100vh;
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 0;
+    background: white;
+    z-index: 1;
 }
 
 

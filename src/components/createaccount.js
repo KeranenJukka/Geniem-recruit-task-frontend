@@ -146,7 +146,7 @@ send = () => {
       
       if (response.data.res === "success") {
         
-        this.props.changeToken(response.data.token)
+       this.props.changeToken(response.data.token, response.data.user)
 
        this.props.history.push('/theapp');
 
@@ -177,17 +177,12 @@ send = () => {
       }, 1000);
 
        
-      
-
-
-
 
 }
 
 
 change = (e) => {
-
-    
+ 
 
     var info = {...this.info}
 
@@ -227,6 +222,8 @@ return (
 
     <div id="createwrap">
 
+<div className="loginwrap2">
+
     <div id="createcont1">
 
     <div className="createaccountcont">
@@ -254,6 +251,7 @@ return (
 
     <div id="createcont2">
 
+   
    <div className="createaccountcont">
 
        <h1 className="thetitle" >Create Account</h1>
@@ -278,7 +276,7 @@ return (
     </div>
 
     </div>
-
+    </div>
     </div>
 
 )
@@ -293,9 +291,10 @@ return (
 function mapDispatchToProps (dispatch) {
   
   return {
-    changeToken: function (arg) {dispatch({
+    changeToken: function (token, user) {dispatch({
         type: "changetoken",
-        token: arg
+        token: token,
+        user: user
     })}
     
   }

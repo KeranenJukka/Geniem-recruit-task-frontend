@@ -18,11 +18,12 @@ const rootReducer = (state=initState, action) => {
 
 if (action.type === "changetoken") {
         
-        console.log(action)
+        
 
         return {
             ...state,
-            token: action.token
+            token: action.token,
+            user: action.user
         }
 
     }

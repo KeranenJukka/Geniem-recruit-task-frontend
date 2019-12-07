@@ -12,8 +12,6 @@ const axios = require('axios');
 
 
 
-
-
 class Theapp extends React.Component {
 
     constructor(props) {
@@ -35,26 +33,30 @@ class Theapp extends React.Component {
 
     }
 
+    logOut = () => {
+
+        this.props.changeToken("", "")
+        this.props.history.push('/');
+
+    }
 
     changePost = (e) => {
-
-        
-
+      
         var text = e.target.value;
         var id = parseInt(e.target.id);
         
-        console.log(typeof text)
+        if (text.length === 0) {text = " "}
 
         var post = {
             id: id,
-            token: "moi",
-            userId: 1,
+            token: this.props.token,
             text: text
         }
      
         axios.post('http://localhost:8080/changepost', post)
-        .then(() => {
+        .then((response) => {
             
+            if (response.data === "error") {this.props.history.push('/');}
         
         })
         
@@ -64,33 +66,34 @@ class Theapp extends React.Component {
     deletePost = (id, token, userId) => {
 
         
-
         var post = {
             id: id,
-            token: "moi",
-            userId: 1
+            token: this.props.token,
+            
         }
-
         
         axios.post('http://localhost:8080/deletepost', post)
-        .then(() => {
+        .then((response) => {
+
             
+            if (response.data === "error") {this.props.history.push('/');}
+
             this.getPosts();
 
         })
         
     }
 
-    getPosts = (id, token) => {
+    getPosts = () => {
 
         var posts;
 
         axios.post('http://localhost:8080/getposts', {
-            id: 1,
-            token: 'Flintstone'
+            token: this.props.token
           })
           .then((response) => {
 
+            if (response.data === "error") {this.props.history.push('/');}
                         
             posts = response.data.map((x) => {
 
@@ -138,18 +141,19 @@ class Theapp extends React.Component {
     }
 
 
-    addPost = (id, token) => {
+    addPost = () => {
 
         var post = {
-            title: "post",
+
             description: "Write here...",
-            userId: 1,
-            checkbox: "no"
+            token: this.props.token
         }
 
         axios.post('http://localhost:8080/addpost', post)
-        .then(() => {
+        .then((response) => {
             
+            if (response.data === "error") {this.props.history.push('/');}
+
             this.getPosts();
 
         })
@@ -171,13 +175,14 @@ componentDidMount() {
         var date = d + "." + m + "." + y;
         
         this.setState({
-            date: date
+            date: date,
+            user: this.props.user,
         })
 
 
         this.getPosts();
 
-
+        
     }
 
 render () {
@@ -186,11 +191,19 @@ render () {
     return (
         <div id="theappcont">
 
+
         <div id="theapp">
-        
+
+       
         <div id="theappstart">
 
-        <div id="theappbox"></div>
+        <div id="theappbox">
+        
+        <div onClick={this.logOut} id="logoutbutton">
+        <p>Logout</p>
+        </div>
+
+        </div>
 
         <div id="theapptext">
 
@@ -224,20 +237,22 @@ render () {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.token,
+        user: state.user
     }
 }
 
 function mapDispatchToProps (dispatch) {
   
-    return {
-      changeLanguage: function (arg) {dispatch({
-          type: "change",
-          language: arg
-      })}
-      
-    }
+  return {
+    changeToken: function (token, user) {dispatch({
+        type: "changetoken",
+        token: token,
+        user: user
+    })}
     
   }
+  
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Theapp);

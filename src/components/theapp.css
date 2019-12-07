@@ -1,15 +1,32 @@
 #theappcont {
 
-    height: auto;
+    height: 100vh;
     width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 #theapp {
+    position: relative;
     width: 100%;
-    max-width: 600px;
+    height: 100%;
+    max-width: 357px;
+    max-height: 667px;
     margin: 0 auto;
     padding: 10px;
     box-sizing: border-box;
+    overflow-y: auto;
+    background: gray;
+}
+
+#logoutbutton {
+    position: absolute;
+    right: 12px
+}
+
+#logoutbutton p {
+    margin: 0;
+    padding: 0;
 }
 
 #theappstart {
