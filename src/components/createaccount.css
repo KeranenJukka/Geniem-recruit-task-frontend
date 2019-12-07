@@ -2,13 +2,26 @@
 /* login.css */
 
 #createwrap {
-    height: 100vh;
+    
+    height: auto;
+    
+}
 
+#createcont1 {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    
+}   
+
+#createcont2 {
+    height: 100vh;
     display: flex;
     align-items: center;
 }
 
-#createaccountcont {
+
+.createaccountcont {
     margin: 0 auto;
     
 }

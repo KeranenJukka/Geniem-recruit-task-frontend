@@ -1,0 +1,101 @@
+#theappcont {
+
+    height: auto;
+    width: 100%;
+}
+
+#theapp {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#theappstart {
+    background: lightblue;
+}
+
+#theappbox {
+    height: 150px;
+    
+}
+
+#theapptext {
+
+    height: auto;
+
+}
+
+#theapptext p {
+    margin: 0;
+    padding: 10px;
+}
+
+#addpost {
+    text-align: center;
+    background: lightgray;
+    cursor: pointer;
+    user-select: none;
+}
+
+#addpost p {
+    margin: 0;
+    padding: 20px;
+}
+
+#posts {
+    height: auto;
+}
+
+.post {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dot {
+    width: 25px;
+    height: 25px;
+    background: blue;
+    border-radius: 25px;
+}
+
+.posttext {
+    margin-left: 20px;
+}
+
+.posttext {
+    width: calc(100% - 60px);
+}
+
+.postinput {
+    border: none;
+    width: calc(100% - 60px);
+    
+}
+
+.posttext p {
+    margin: 0;
+    padding: 0;
+}
+
+.deletebutton {
+    
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.minus {
+    height: 7px;
+    width: 25px;
+    background: red;
+}
+
+
+

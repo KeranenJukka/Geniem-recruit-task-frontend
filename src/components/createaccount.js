@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 
 import './createaccount.css';
 
-import { Link } from 'react-router-dom';
+
+
+import { TweenMax } from "gsap";
 
 
 
@@ -38,21 +40,66 @@ class CreateAccount extends React.Component {
       
     }
 
-send = () => {
+
+checkName = () => {
 
   var user = "Username";
+  var info = {...this.info}
+
+
+  if (this.info.username.length === 0) {
+    user = "Pick a username!"
+    document.getElementById("user").style.color = "red";
+
+    this.setState({
+      username: user
+    })
+
+    return null
+
+  }
+
+
+  axios.post('http://localhost:8080/checkuser', info)
+  .then(response => {
+    
+    if (response.data === "found") {
+
+      this.setState({
+        username: "This username is reserved!"
+      })
+      document.getElementById("user").style.color = "red";
+
+      return null
+    }
+    
+    else {
+
+      this.setState({
+        username: "Username"
+      })
+
+      document.getElementById("user").style.color = "black";
+
+      
+
+    }
+
+  })
+
+
+}
+
+
+send = () => {
+
+  
   var first = "First Name"
   var pass = "Password"
 
 
-    if (this.info.username.length === 0 || this.info.firstname.length === 0 || this.info.password.length < 6) {
-
-      if (this.info.username.length === 0) {
-        user = "Pick a username!"
-        document.getElementById("user").style.color = "red";
-      }
-
-      else {document.getElementById("user").style.color = "black";}
+    if (this.info.firstname.length === 0 || this.info.password.length < 6) {
+      
 
       if (this.info.firstname.length === 0) {
         first = "Pick a name!"
@@ -69,7 +116,6 @@ send = () => {
       else {document.getElementById("pass").style.color = "black";}
 
       this.setState({
-        username: user,
         firstname: first,
         password: pass
       })
@@ -80,37 +126,17 @@ send = () => {
 
 
     this.setState({
-      username: user,
       firstname: first,
       password: pass
     })
 
-    document.getElementById("user").style.color = "black";
+    
     document.getElementById("first").style.color = "black";
     document.getElementById("pass").style.color = "black";
 
     var infoSend = {...this.info}
 
 
-
-    /* -------Check name--------*/
-
-    axios.post('http://localhost:8080/checkuser', infoSend)
-    .then(response => {
-      
-      if (response.data === "found") {
-
-        this.setState({
-          username: "This username is reserved!"
-        })
-        document.getElementById("user").style.color = "red";
-
-        return null
-      }
-      
-      else {
-
-    
 
   /* -------Store info--------*/
 
@@ -122,7 +148,7 @@ send = () => {
         
         this.props.changeToken(response.data.token)
 
-       // this.props.history.push('/theapp');
+       this.props.history.push('/theapp');
 
       }
       
@@ -152,9 +178,9 @@ send = () => {
 
        
       
-}
 
-})
+
+
 
 }
 
@@ -201,14 +227,39 @@ return (
 
     <div id="createwrap">
 
-    <div id="createaccountcont">
+    <div id="createcont1">
 
-       <h1 className="thetitle" id="createtitle">Create Account</h1>
+    <div className="createaccountcont">
 
-        <div className="form" id="createform">
+       <h1 className="thetitle" >Create Account</h1>
+
+        <div className="form">
             <p id="user" className="info">{this.state.username}</p>
             <input id="username" maxLength="20" onChange={this.change} type="text"></input>
 
+
+        </div>
+
+        <div className="buttoncont">
+        <div onClick={this.checkName} className="button" id="loginbutton"><p>CREATE</p></div>
+        </div>
+
+    </div>
+
+    </div>
+
+
+    {/*-------------------------------------------------*/}
+
+
+    <div id="createcont2">
+
+   <div className="createaccountcont">
+
+       <h1 className="thetitle" >Create Account</h1>
+
+        <div className="form">
+           
             <p id="first" className="info">{this.state.firstname}</p>
             <input id="firstname" maxLength="20" onChange={this.change} type="text"></input>
 
@@ -220,12 +271,13 @@ return (
 
         </div>
 
-        <div className="buttoncont" id="loginbutcont">
+        <div className="buttoncont">
         <div onClick={this.send} className="button" id="loginbutton"><p>CREATE</p></div>
         </div>
 
     </div>
 
+    </div>
 
     </div>
 
