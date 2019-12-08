@@ -3,30 +3,24 @@
 
 #createwrap {
     
-    height: auto;
-    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 #createcont1 {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    background: lightgray;
-    z-index: 10;
+    margin: 0 auto;
+    opacity: 0;
+    width: 90%;
 }   
 
 #createcont2 {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    background: white;
-    z-index: 1;
+    margin: 0 auto;
+    
+    display: none;
+    width: 90%;
 }
-
 
 .createaccountcont {
     margin: 0 auto;

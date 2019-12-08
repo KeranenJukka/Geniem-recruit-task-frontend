@@ -5,6 +5,7 @@ import './login.css';
 
 import { Link } from 'react-router-dom';
 
+import { TweenMax } from "gsap";
 
 const axios = require('axios');
 
@@ -21,6 +22,7 @@ class Login extends React.Component {
         }
 
     }
+
 
 loginInfo = (e) => {
 
@@ -45,6 +47,7 @@ loginInfo = (e) => {
 
 }
 
+
 sendInfo = () => {
 
     var info = {...this.info}
@@ -53,7 +56,7 @@ sendInfo = () => {
     axios.post('http://localhost:8080/login', info)
     .then(response => {
 
-        console.log(response)
+        
 
         if (response.data === "no" || response.data === false) {
             
@@ -68,14 +71,50 @@ sendInfo = () => {
 
             this.props.changeToken(token, user);
 
-            this.props.history.push('/theapp');
+            var cont = document.getElementById("logincont");
+
+            TweenMax.to(cont, 0.5, {opacity: 0})
+        
+            setTimeout(() => {
+                this.props.history.push('/theapp');
+            }, 500);
+        
 
         }
 
-        
-
-
     })
+
+}
+
+
+press = () => {
+
+    var button = document.getElementById("loginbutton");
+    
+    
+    TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+    TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+    
+    setTimeout(() => {
+        
+        this.sendInfo();
+
+    }, 350);
+
+}
+
+
+create = () => {
+
+    var cont = document.getElementById("logincont");
+
+    TweenMax.to(cont, 0.5, {opacity: 0})
+
+    setTimeout(() => {
+        this.props.history.push('/createaccount');
+    }, 500);
+
+   
 
 }
 
@@ -91,7 +130,7 @@ return (
         <div id="logincont">
         
         
-        <h1 className="thetitle">To Do Web App</h1>
+        <h1 className="thetitle">Just do it!</h1>
 
         <div className="form" id="logininfo">
 
@@ -100,12 +139,12 @@ return (
         <p className="info">Password</p>
         <input onChange={this.loginInfo} id="password" type="text"></input>
 
-        <div onClick={this.sendInfo} className="buttoncont" id="loginbutcont">
+        <div onClick={this.press} className="buttoncont" id="loginbutcont">
         <div className="button" id="loginbutton"><p>LOGIN</p></div>
         </div>
 
         <div id="createcont">
-        <Link id="loginaccount" to="/createaccount">Create Account</Link>
+        <p onClick={this.create} id="loginaccount">Create Account</p>
         </div>
 
         <p id="wrong">Wrong username or password!</p>
@@ -118,10 +157,7 @@ return (
 
 )
 
-
-
 }
-
 
 }
 

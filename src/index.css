@@ -10,9 +10,26 @@ body {
   margin: 0;
   padding: 0;
 
-  --color1: #427AA1;
-  --color2: #63B4D1;
-  
+  background: #eeeeee;
 
+  --color1: #231f20;
+  --color2: #d35a4f;
+  --color3: #63aba7;
+  
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-family: 'Mansalva', cursive;
+  color: var(--color1);
+}
+
+p {
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  color: var(--color1);
 }
 

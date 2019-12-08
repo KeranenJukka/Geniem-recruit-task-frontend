@@ -5,8 +5,11 @@ import './theapp.css';
 
 import { Link } from 'react-router-dom';
 
-import check from '../pictures/check.png'
-import check2 from '../pictures/check2.png'
+import note from '../pictures/note.png';
+import mountains from '../pictures/mountains.jpg'
+
+
+import { TweenMax } from 'gsap/gsap-core';
 
 const axios = require('axios');
 
@@ -36,7 +39,13 @@ class Theapp extends React.Component {
     logOut = () => {
 
         this.props.changeToken("", "")
-        this.props.history.push('/');
+        
+        var theapp = document.getElementById("theapp");
+        TweenMax.to(theapp, 0.5, {opacity: 0})
+
+        setTimeout(() => {
+            this.props.history.push('/');
+        }, 500);
 
     }
 
@@ -65,7 +74,15 @@ class Theapp extends React.Component {
 
     deletePost = (id, token, userId) => {
 
-        
+        var butId = "minus"+id;
+
+        var button = document.getElementById(butId);
+
+        TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+        TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+
+        setTimeout(() => {
+            
         var post = {
             id: id,
             token: this.props.token,
@@ -81,6 +98,8 @@ class Theapp extends React.Component {
             this.getPosts();
 
         })
+
+         }, 350);
         
     }
 
@@ -102,15 +121,15 @@ class Theapp extends React.Component {
                 return (
                     <div key={x.id} className="post">
 
-                    <div onClick={() => this.check(x.id)} className="check">
-                        <div className="dot" id={x.id}></div>
+                    <div className="note">
+                        <img src={note}></img>
                     </div>
 
                     <div className="posttext">
-                       <input maxLength="50" id={x.id} onChange={this.changePost} className="postinput" defaultValue={x.description} type="text"></input>
+                       <input onClick={this.removeText} maxLength="50" id={x.id} onChange={this.changePost} className="postinput" defaultValue={x.description} type="text"></input>
                     </div>
 
-                    <div onClick={()=> this.deletePost(x.id, "token", "userid")} className="deletebutton">
+                    <div id={"minus"+x.id} onClick={()=> this.deletePost(x.id, "token", "userid")} className="deletebutton">
                         <div className="minus"></div>
                     </div>
 
@@ -156,11 +175,38 @@ class Theapp extends React.Component {
 
             this.getPosts();
 
+
         })
 
     }
 
+    pressPost = () => {
 
+        var add = document.getElementById("addpost");
+
+        TweenMax.to(add, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+        TweenMax.to(add, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+
+        setTimeout(() => {
+      
+            this.addPost();
+      
+        }, 350);
+
+
+    }
+
+
+    removeText = (e) => {
+
+        if (e.target.value === "Write here...") {
+
+            var input = document.getElementById(e.target.id)
+            input.value = "";
+
+            this.changePost(e);
+        }
+    }
 
 componentDidMount() {
         
@@ -182,7 +228,9 @@ componentDidMount() {
 
         this.getPosts();
 
-        
+        var theapp = document.getElementById("theapp");
+        TweenMax.to(theapp, 0.5, {opacity: 1})
+
     }
 
 render () {
@@ -197,6 +245,8 @@ render () {
        
         <div id="theappstart">
 
+        <img id="backgroundpic" src={mountains}></img>
+
         <div id="theappbox">
         
         <div onClick={this.logOut} id="logoutbutton">
@@ -207,8 +257,8 @@ render () {
 
         <div id="theapptext">
 
-            <p>{this.state.date}</p>
-            <p>Welcome {this.state.user}</p>
+            <p id="theappdate">{this.state.date}</p>
+            <p id="theappuser">Welcome {this.state.user}</p>
             
         </div>
 
@@ -216,7 +266,7 @@ render () {
 
 
 
-        <div onClick={this.addPost} id="addpost"><p>ADD POST</p></div>
+        <div onClick={this.pressPost} id="addpost"><p>ADD POST</p></div>
 
         <div id="posts">
             {this.state.posts}

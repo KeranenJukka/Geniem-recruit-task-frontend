@@ -11,20 +11,24 @@
     height: 100%;
     max-width: 357px;
     max-height: 667px;
-    background: tomato;
     display: flex;
     align-items: center;
     margin: 0 auto;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: white;
 }
 
 #logincont {
     margin: 0 auto;
-    background: lightgray;
-
+    width: 90%;
+    box-sizing: border-box;
+    
 }
 
 #logincont2 {
     width: 100%;
+    box-sizing: border-box;
 }
 
 .thetitle {
@@ -32,6 +36,7 @@
     margin: 0;
     margin-bottom: 40px;
     text-align: center;
+    
 }
 
 #logininfo {
@@ -47,13 +52,14 @@ height: auto;
 }
 
 .form input {
-    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
     margin: 0;
-    border: none;
     height: 30px;
     margin-bottom: 20px;
     width: 100%;
-    border: solid 1px var(--color1);
+    border: solid 1px var(--color2);
     border-radius: 5px;
 }
 
@@ -79,13 +85,11 @@ height: auto;
     cursor: pointer;
 }
 
-.button:active {
-    filter: brightness(70%);
-}
 
 .button p {
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 #createcont {
@@ -93,17 +97,24 @@ height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 }
 
 #loginaccount {
     height: auto;
     margin-bottom: 20px;
+    color: var(--color3)
+}
+
+#loginbutton {
+    transform: scale(1);
 }
 
 #wrong {
     text-align: center;
     padding: 0;
     margin: 0;
-    color: red;
+    color: var(--color2);
     visibility: hidden;
 }
+

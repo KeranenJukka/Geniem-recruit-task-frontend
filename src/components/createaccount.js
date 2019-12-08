@@ -49,7 +49,7 @@ checkName = () => {
 
   if (this.info.username.length === 0) {
     user = "Pick a username!"
-    document.getElementById("user").style.color = "red";
+    document.getElementById("user").style.color = "var(--color2)";
 
     this.setState({
       username: user
@@ -68,18 +68,27 @@ checkName = () => {
       this.setState({
         username: "This username is reserved!"
       })
-      document.getElementById("user").style.color = "red";
+      document.getElementById("user").style.color = "var(--color2)";
 
       return null
     }
     
     else {
 
-      this.setState({
-        username: "Username"
-      })
 
-      document.getElementById("user").style.color = "black";
+      var cont = document.getElementById("createcont1");
+      var cont2 = document.getElementById("createcont2");
+      
+      TweenMax.to(cont, 0.5, {opacity: 0});
+      TweenMax.to(cont2, 0, {opacity: 0});
+
+      setTimeout(() => {
+        cont.style.display = "none";
+        cont2.style.display = "initial";
+        TweenMax.to(cont2, 0.5, {opacity: 1});
+
+      }, 350);
+      
 
       
 
@@ -103,14 +112,14 @@ send = () => {
 
       if (this.info.firstname.length === 0) {
         first = "Pick a name!"
-        document.getElementById("first").style.color = "red";
+        document.getElementById("first").style.color = "var(--color2)";
       }
 
       else {document.getElementById("first").style.color = "black";}
 
       if (this.info.password.length < 6) {
         pass = "Pick a password that is at least 6 characters long!"
-        document.getElementById("pass").style.color = "red";
+        document.getElementById("pass").style.color = "var(--color2)";
       }
 
       else {document.getElementById("pass").style.color = "black";}
@@ -124,15 +133,6 @@ send = () => {
 
     }
 
-
-    this.setState({
-      firstname: first,
-      password: pass
-    })
-
-    
-    document.getElementById("first").style.color = "black";
-    document.getElementById("pass").style.color = "black";
 
     var infoSend = {...this.info}
 
@@ -148,7 +148,15 @@ send = () => {
         
        this.props.changeToken(response.data.token, response.data.user)
 
-       this.props.history.push('/theapp');
+      var cont2 = document.getElementById("createcont2");
+
+      TweenMax.to(cont2, 0.5, {opacity: 0})
+
+      setTimeout(() => {
+        this.props.history.push('/theapp');
+      }, 500);
+
+      
 
       }
       
@@ -157,26 +165,7 @@ send = () => {
       
     });
     
-
-    setTimeout(() => {
-  
-        axios.get('http://localhost:8080/users')
-        .then(function (response) {
-          // handle success
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        });
       
-      
-      }, 1000);
-
-       
 
 }
 
@@ -211,9 +200,47 @@ change = (e) => {
 
     this.info = info;
     
+}
+
+
+press = () => {
+  
+  var button = document.getElementById("loginbutton2");
+  
+  
+  TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+  TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+  
+  setTimeout(() => {
+      
+      this.checkName();
+
+  }, 350);
 
 }
 
+press2 = () => {
+  
+  var button = document.getElementById("loginbutton3");
+  
+  
+  TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+  TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+  
+  setTimeout(() => {
+      
+      this.send();
+
+  }, 350);
+
+}
+
+componentDidMount () {
+
+  var cont1 = document.getElementById("createcont1");
+  TweenMax.to(cont1, 0.5, {opacity: 1})
+
+}
 
 
 render () {
@@ -222,7 +249,7 @@ return (
 
     <div id="createwrap">
 
-<div className="loginwrap2">
+    <div className="loginwrap2">
 
     <div id="createcont1">
 
@@ -237,8 +264,8 @@ return (
 
         </div>
 
-        <div className="buttoncont">
-        <div onClick={this.checkName} className="button" id="loginbutton"><p>CREATE</p></div>
+        <div onClick={this.press} className="buttoncont" id="loginbutcont">
+        <div className="button" id="loginbutton2"><p>CREATE</p></div>
         </div>
 
     </div>
@@ -270,12 +297,15 @@ return (
         </div>
 
         <div className="buttoncont">
-        <div onClick={this.send} className="button" id="loginbutton"><p>CREATE</p></div>
+        <div onClick={this.press2} className="button" id="loginbutton3"><p>CREATE</p></div>
         </div>
 
     </div>
 
+
     </div>
+
+    
     </div>
     </div>
 
