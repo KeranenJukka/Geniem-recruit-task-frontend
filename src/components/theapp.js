@@ -231,6 +231,23 @@ componentDidMount() {
         var theapp = document.getElementById("theapp");
         TweenMax.to(theapp, 0.5, {opacity: 1})
 
+        //////////////////////////////
+
+        axios.get('http://localhost:8080/users')
+        .then(function (response) {
+          // handle success
+          console.log(response.data);
+        })
+
+        axios.get('http://localhost:8080/todos')
+        .then(function (response) {
+          // handle success
+          console.log(response.data);
+        })
+
+
+        //////////////////////////////
+
     }
 
 render () {
