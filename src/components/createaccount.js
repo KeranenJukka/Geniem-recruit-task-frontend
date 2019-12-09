@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import './createaccount.css';
 
-import { TweenMax } from "gsap";
+import gsap from "gsap";
 
 import { Link  } from "react-router-dom";
 
@@ -74,13 +74,13 @@ checkName = () => {
       var cont = document.getElementById("createcont1");
       var cont2 = document.getElementById("createcont2");
       
-      TweenMax.to(cont, 0.5, {opacity: 0});
-      TweenMax.to(cont2, 0, {opacity: 0});
+      gsap.to(cont, 0.5, {opacity: 0});
+      gsap.to(cont2, 0, {opacity: 0});
 
       setTimeout(() => {
         cont.style.display = "none";
         cont2.style.display = "initial";
-        TweenMax.to(cont2, 0.5, {opacity: 1});
+        gsap.to(cont2, 0.5, {opacity: 1});
 
       }, 350);
        
@@ -141,7 +141,7 @@ send = () => {
 
       var cont2 = document.getElementById("createcont2");
 
-      TweenMax.to(cont2, 0.5, {opacity: 0})
+      gsap.to(cont2, 0.5, {opacity: 0})
 
       setTimeout(() => {
         document.getElementById("theapp").click();
@@ -198,8 +198,8 @@ press = () => {
   var button = document.getElementById("loginbutton2");
   
   
-  TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
-  TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+  gsap.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+  gsap.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
   
   setTimeout(() => {
       
@@ -214,8 +214,8 @@ press2 = () => {
   var button = document.getElementById("loginbutton3");
   
   
-  TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
-  TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+  gsap.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+  gsap.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
   
   setTimeout(() => {
       
@@ -226,14 +226,18 @@ press2 = () => {
 }
 
 
-
-componentDidMount () {
-
+opacity = () => {
   var cont1 = document.getElementById("createcont1");
-  TweenMax.to(cont1, 0.5, {opacity: 1})
+  gsap.to(cont1, 0.5, {opacity: 1})
 
 }
 
+
+componentDidMount () {
+
+    this.opacity();
+
+}
 
 
 render () {
@@ -244,7 +248,7 @@ return (
 
     <div className="loginwrap2">
 
-    <div id="createcont1">
+    <div onLoad={this.opacity} id="createcont1">
 
     <div className="createaccountcont">
 

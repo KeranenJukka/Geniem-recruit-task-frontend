@@ -6,7 +6,7 @@ import './theapp.css';
 import note from '../pictures/note.png';
 import mountains from '../pictures/mountains.jpg'
 
-import { TweenMax } from 'gsap/gsap-core';
+import gsap from "gsap";
 
 import { Link  } from "react-router-dom";
 
@@ -36,7 +36,7 @@ class Theapp extends React.Component {
         this.props.changeToken("", "")
         
         var theapp = document.getElementById("theapp");
-        TweenMax.to(theapp, 0.5, {opacity: 0})
+        gsap.to(theapp, 0.5, {opacity: 0})
 
         setTimeout(() => {
             document.getElementById("logout").click();
@@ -74,8 +74,8 @@ class Theapp extends React.Component {
 
         var button = document.getElementById(butId);
 
-        TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
-        TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+        gsap.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+        gsap.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
 
         setTimeout(() => {
             
@@ -180,8 +180,8 @@ class Theapp extends React.Component {
 
         var add = document.getElementById("addpost");
 
-        TweenMax.to(add, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
-        TweenMax.to(add, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+        gsap.to(add, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+        gsap.to(add, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
 
         setTimeout(() => {
       
@@ -205,6 +205,14 @@ class Theapp extends React.Component {
     }
 
 
+    opacity = () => {
+
+        var theapp = document.getElementById("theapp");
+        gsap.to(theapp, 0.5, {opacity: 1})
+
+
+    }
+
 
 componentDidMount() {
         
@@ -226,9 +234,7 @@ componentDidMount() {
 
         this.getPosts();
 
-        var theapp = document.getElementById("theapp");
-        TweenMax.to(theapp, 0.5, {opacity: 1})
-
+        this.opacity()
 
     }
 

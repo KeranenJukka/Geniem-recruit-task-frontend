@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import './login.css';
 
-import { TweenMax } from "gsap";
+import gsap from "gsap";
 
 import { Link  } from "react-router-dom";
 
@@ -76,7 +76,7 @@ sendInfo = () => {
 
             var cont = document.getElementById("logincont");
 
-            TweenMax.to(cont, 0.5, {opacity: 0})
+            gsap.to(cont, 0.5, {opacity: 0})
         
             setTimeout(() => {
                 document.getElementById("theapp").click();
@@ -96,8 +96,8 @@ press = () => {
     var button = document.getElementById("loginbutton");
     
     
-    TweenMax.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
-    TweenMax.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
+    gsap.to(button, 0.12, {css:{scaleX:0.8, scaleY:0.8}});
+    gsap.to(button, 0.12, {css:{scaleX:1, scaleY:1}, delay: 0.12});
     
     setTimeout(() => {
         
@@ -112,7 +112,7 @@ create = () => {
 
     var cont = document.getElementById("logincont");
 
-    TweenMax.to(cont, 0.5, {opacity: 0})
+    gsap.to(cont, 0.5, {opacity: 0})
 
     setTimeout(() => {
         document.getElementById("createaccount").click();
