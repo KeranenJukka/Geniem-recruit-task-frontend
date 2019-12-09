@@ -3,16 +3,9 @@ import {connect} from 'react-redux';
 
 import './createaccount.css';
 
-
-
 import { TweenMax } from "gsap";
 
-
-
 const axios = require('axios');
-
-var bcrypt = require('bcryptjs');
-
 
 
 
@@ -88,9 +81,7 @@ checkName = () => {
         TweenMax.to(cont2, 0.5, {opacity: 1});
 
       }, 350);
-      
-
-      
+       
 
     }
 
@@ -133,9 +124,7 @@ send = () => {
 
     }
 
-
     var infoSend = {...this.info}
-
 
 
   /* -------Store info--------*/
@@ -157,7 +146,6 @@ send = () => {
       }, 500);
 
       
-
       }
       
     })
@@ -165,14 +153,13 @@ send = () => {
       
     });
     
-      
-
+    
 }
+
 
 
 change = (e) => {
  
-
     var info = {...this.info}
 
     switch (e.target.id) {
@@ -201,6 +188,7 @@ change = (e) => {
     this.info = info;
     
 }
+
 
 
 press = () => {
@@ -235,12 +223,15 @@ press2 = () => {
 
 }
 
+
+
 componentDidMount () {
 
   var cont1 = document.getElementById("createcont1");
   TweenMax.to(cont1, 0.5, {opacity: 1})
 
 }
+
 
 
 render () {
@@ -311,9 +302,7 @@ return (
 
 )
 
-
 }
-
 
 }
 

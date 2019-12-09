@@ -1,13 +1,10 @@
-import React from 'react';
+import React from 'react'
 import {connect} from 'react-redux';
 
 import './theapp.css';
 
-import { Link } from 'react-router-dom';
-
 import note from '../pictures/note.png';
 import mountains from '../pictures/mountains.jpg'
-
 
 import { TweenMax } from 'gsap/gsap-core';
 
@@ -30,11 +27,7 @@ class Theapp extends React.Component {
      
     }
 
-    check = (e) => {
 
-        console.log(e)
-
-    }
 
     logOut = () => {
 
@@ -48,6 +41,7 @@ class Theapp extends React.Component {
         }, 500);
 
     }
+
 
     changePost = (e) => {
       
@@ -72,7 +66,7 @@ class Theapp extends React.Component {
     }
 
 
-    deletePost = (id, token, userId) => {
+    deletePost = (id) => {
 
         var butId = "minus"+id;
 
@@ -103,6 +97,7 @@ class Theapp extends React.Component {
         
     }
 
+
     getPosts = () => {
 
         var posts;
@@ -122,14 +117,14 @@ class Theapp extends React.Component {
                     <div key={x.id} className="post">
 
                     <div className="note">
-                        <img src={note}></img>
+                        <img alt="note" src={note}></img>
                     </div>
 
                     <div className="posttext">
                        <input onClick={this.removeText} maxLength="50" id={x.id} onChange={this.changePost} className="postinput" defaultValue={x.description} type="text"></input>
                     </div>
 
-                    <div id={"minus"+x.id} onClick={()=> this.deletePost(x.id, "token", "userid")} className="deletebutton">
+                    <div id={"minus"+x.id} onClick={()=> this.deletePost(x.id)} className="deletebutton">
                         <div className="minus"></div>
                     </div>
 
@@ -147,17 +142,14 @@ class Theapp extends React.Component {
             })
 
 
-
           })
-          .catch(function (error) {
+          .catch(function () {
             
-          });
-
-
-        
+          });   
 
 
     }
+
 
 
     addPost = () => {
@@ -179,6 +171,8 @@ class Theapp extends React.Component {
         })
 
     }
+
+
 
     pressPost = () => {
 
@@ -208,6 +202,8 @@ class Theapp extends React.Component {
         }
     }
 
+
+
 componentDidMount() {
         
 
@@ -231,24 +227,10 @@ componentDidMount() {
         var theapp = document.getElementById("theapp");
         TweenMax.to(theapp, 0.5, {opacity: 1})
 
-        //////////////////////////////
-
-        axios.get('http://localhost:8080/users')
-        .then(function (response) {
-          // handle success
-          console.log(response.data);
-        })
-
-        axios.get('http://localhost:8080/todos')
-        .then(function (response) {
-          // handle success
-          console.log(response.data);
-        })
-
-
-        //////////////////////////////
 
     }
+
+
 
 render () {
 
@@ -262,7 +244,7 @@ render () {
        
         <div id="theappstart">
 
-        <img id="backgroundpic" src={mountains}></img>
+        <img alt="mountains" id="backgroundpic" src={mountains}></img>
 
         <div id="theappbox">
         

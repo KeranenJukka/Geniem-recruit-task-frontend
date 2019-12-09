@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 
 import './login.css';
 
-import { Link } from 'react-router-dom';
-
 import { TweenMax } from "gsap";
 
 const axios = require('axios');
+
 
 
 class Login extends React.Component {
@@ -46,6 +45,7 @@ loginInfo = (e) => {
     this.info = info;
 
 }
+
 
 
 sendInfo = () => {
@@ -87,6 +87,7 @@ sendInfo = () => {
 }
 
 
+
 press = () => {
 
     var button = document.getElementById("loginbutton");
@@ -114,9 +115,8 @@ create = () => {
         this.props.history.push('/createaccount');
     }, 500);
 
-   
-
 }
+
 
 
 render () {
@@ -160,6 +160,7 @@ return (
 }
 
 }
+
 
 function mapDispatchToProps (dispatch) {
   
