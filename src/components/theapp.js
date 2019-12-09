@@ -58,7 +58,7 @@ class Theapp extends React.Component {
             text: text
         }
      
-        axios.post('http://localhost:8080/changepost', post)
+        axios.post('/changepost', post)
         .then((response) => {
             
             if (response.data === "error") {this.props.history.push('/');}
@@ -85,7 +85,7 @@ class Theapp extends React.Component {
             
         }
         
-        axios.post('http://localhost:8080/deletepost', post)
+        axios.post('/deletepost', post)
         .then((response) => {
 
             
@@ -104,7 +104,7 @@ class Theapp extends React.Component {
 
         var posts;
 
-        axios.post('http://localhost:8080/getposts', {
+        axios.post('/getposts', {
             token: this.props.token
           })
           .then((response) => {
@@ -162,7 +162,7 @@ class Theapp extends React.Component {
             token: this.props.token
         }
 
-        axios.post('http://localhost:8080/addpost', post)
+        axios.post('/addpost', post)
         .then((response) => {
             
             if (response.data === "error") {this.props.history.push('/');}

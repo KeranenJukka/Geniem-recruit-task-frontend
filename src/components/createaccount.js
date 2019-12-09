@@ -55,7 +55,7 @@ checkName = () => {
   }
 
 
-  axios.post('http://localhost:8080/checkuser', info)
+  axios.post('/checkuser', info)
   .then(response => {
     
     if (response.data === "found") {
@@ -132,7 +132,7 @@ send = () => {
   /* -------Store info--------*/
 
 
-      axios.post('http://localhost:8080/adduser', infoSend)
+      axios.post('/adduser', infoSend)
     .then( (response) => {
       
       if (response.data.res === "success") {

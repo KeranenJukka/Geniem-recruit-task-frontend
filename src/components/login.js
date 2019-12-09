@@ -56,7 +56,7 @@ sendInfo = () => {
     var info = {...this.info}
 
     
-    axios.post('http://localhost:8080/login', info)
+    axios.post('/login', info)
     .then(response => {
 
         
