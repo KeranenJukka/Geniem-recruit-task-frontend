@@ -5,6 +5,8 @@ import './createaccount.css';
 
 import { TweenMax } from "gsap";
 
+import { Link  } from "react-router-dom";
+
 const axios = require('axios');
 
 
@@ -142,7 +144,7 @@ send = () => {
       TweenMax.to(cont2, 0.5, {opacity: 0})
 
       setTimeout(() => {
-        this.props.history.push('/theapp');
+        document.getElementById("theapp").click();
       }, 500);
 
       
@@ -290,7 +292,7 @@ return (
         <div className="buttoncont">
         <div onClick={this.press2} className="button" id="loginbutton3"><p>CREATE</p></div>
         </div>
-
+        <Link id="theapp" to="/theapp"></Link>
     </div>
 
 
@@ -298,6 +300,7 @@ return (
 
     
     </div>
+    
     </div>
 
 )

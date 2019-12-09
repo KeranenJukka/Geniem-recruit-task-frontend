@@ -8,6 +8,8 @@ import mountains from '../pictures/mountains.jpg'
 
 import { TweenMax } from 'gsap/gsap-core';
 
+import { Link  } from "react-router-dom";
+
 const axios = require('axios');
 
 
@@ -37,7 +39,7 @@ class Theapp extends React.Component {
         TweenMax.to(theapp, 0.5, {opacity: 0})
 
         setTimeout(() => {
-            this.props.history.push('/');
+            document.getElementById("logout").click();
         }, 500);
 
     }
@@ -271,9 +273,10 @@ render () {
             {this.state.posts}
         </div>
 
+        <Link id="logout" to="/"></Link>
 
         </div>
-
+        
         </div>
 
     )

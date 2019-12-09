@@ -5,7 +5,10 @@ import './login.css';
 
 import { TweenMax } from "gsap";
 
+import { Link  } from "react-router-dom";
+
 const axios = require('axios');
+
 
 
 
@@ -76,7 +79,7 @@ sendInfo = () => {
             TweenMax.to(cont, 0.5, {opacity: 0})
         
             setTimeout(() => {
-                this.props.history.push('/theapp');
+                document.getElementById("theapp").click();
             }, 500);
         
 
@@ -112,7 +115,7 @@ create = () => {
     TweenMax.to(cont, 0.5, {opacity: 0})
 
     setTimeout(() => {
-        this.props.history.push('/createaccount');
+        document.getElementById("createaccount").click();
     }, 500);
 
 }
@@ -148,10 +151,15 @@ return (
         </div>
 
         <p id="wrong">Wrong username or password!</p>
+
+        <Link id="createaccount" to="/createaccount"></Link>
+        <Link id="theapp" to="/theapp"></Link>
         
         </div>
         </div>
+
         </div>
+
 
     </div>
 
